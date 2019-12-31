@@ -81,4 +81,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         });
         return employeeList;
     }
+
+    // Updating a particular Employee
+    public void updateEmployee(Employee employee) {
+        String sql = "update Employee set age =?, dept=?,name=? where id=?";
+        jdbcTemplate.update(sql, employee.getAge(), employee.getDept(), employee.getName(), employee.getId());
+    }
 }
