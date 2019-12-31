@@ -53,5 +53,12 @@ public class EmployeeController {
 
     }
 
+    @RequestMapping(value = "/delete/{id}")
+    public ModelAndView deleteEmployee(@ModelAttribute("employee") Employee employee, @PathVariable("id") int id) {
+        employeeDAO.deleteEmployee(id);
+
+        return new ModelAndView("redirect:/employees");
+    }
+
 
 }
