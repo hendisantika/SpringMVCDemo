@@ -87,4 +87,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         String sql = "update Employee set age =?, dept=?,name=? where id=?";
         jdbcTemplate.update(sql, employee.getAge(), employee.getDept(), employee.getName(), employee.getId());
     }
+
+    // Deletion of a particular Employee
+    public void deleteEmployee(int id) {
+        String sql = "delete employee where id=?";
+        jdbcTemplate.update(sql, id);
+    }
 }
