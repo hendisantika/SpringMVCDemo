@@ -4,7 +4,11 @@ import com.hendisantika.springmvcdemo.entity.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,5 +35,23 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         String sql = "insert into Employee values(?,?,?,?)";
         LOGGER.info("DAO Called {}", sql);
         jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getDept(), employee.getAge());
+    }
+
+    // Getting a particular Employee
+    public Employee getEmployeeById(int id) {
+        String sql = "select * from Employee where id=?";
+        Employee employee = jdbcTemplate.queryForObject(sql, new Object[]
+                {id}, new RowMapper<Employee>() {
+            @Override
+            public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Employee employee = new Employee();
+                employee.setId(rs.getInt(1));
+                employee.setName(rs.getString(2));
+                employee.setDept(rs.getString(3));
+                employee.setAge(rs.getInt(4));
+                return employee;
+            }
+        });
+        return employee;
     }
 }
