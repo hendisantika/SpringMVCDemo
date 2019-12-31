@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -35,5 +38,20 @@ public class EmployeeController {
         }
         return new ModelAndView("redirect:/employees");
     }
+
+    @RequestMapping(value = "/edit/{id}")
+    public ModelAndView editEmployee(@ModelAttribute("employee") Employee employee, @PathVariable("id") int id) {
+        ModelAndView model = new ModelAndView("employees");
+
+        employee = employeeDAO.getEmployeeById(id);
+        List<Employee> employeeList = employeeDAO.getAllEmployees();
+
+        model.addObject("employee", employee);
+        model.addObject("employeeList", employeeList);
+
+        return model;
+
+    }
+
 
 }
