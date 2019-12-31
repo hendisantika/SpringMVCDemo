@@ -3,12 +3,16 @@ package com.hendisantika.springmvcdemo.dao;
 import com.hendisantika.springmvcdemo.entity.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -53,5 +57,28 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             }
         });
         return employee;
+    }
+
+    // Getting all the Employees
+    public List<Employee> getAllEmployees() {
+        String sql = "select * from Employee";
+
+        List<Employee> employeeList = jdbcTemplate.query(sql, new ResultSetExtractor<List<Employee>>() {
+            @Override
+            public List<Employee> extractData(ResultSet rs) throws SQLException, DataAccessException {
+                List<Employee> list = new ArrayList<Employee>();
+                while (rs.next()) {
+                    Employee employee = new Employee();
+                    employee.setId(rs.getInt(1));
+                    employee.setName(rs.getString(2));
+                    employee.setDept(rs.getString(3));
+                    employee.setAge(rs.getInt(4));
+                    list.add(employee);
+                }
+                return list;
+            }
+
+        });
+        return employeeList;
     }
 }
