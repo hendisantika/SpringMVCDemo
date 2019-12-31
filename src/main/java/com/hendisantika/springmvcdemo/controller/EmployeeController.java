@@ -60,5 +60,14 @@ public class EmployeeController {
         return new ModelAndView("redirect:/employees");
     }
 
+    @RequestMapping(value = "/employees")
+    public ModelAndView listEmployees(@ModelAttribute("employee") Employee employee) {
+        ModelAndView model = new ModelAndView("employees");
 
+        List<Employee> employeeList = employeeDAO.getAllEmployees();
+        System.out.println(employeeList);
+        model.addObject("employeeList", employeeList);
+
+        return model;
+    }
 }
