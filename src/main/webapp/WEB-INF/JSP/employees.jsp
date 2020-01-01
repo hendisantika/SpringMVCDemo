@@ -12,7 +12,7 @@
 <body>
 <h3>Add / Edit Employee!!!</h3>
 
-<form:form method="post" action="/SpringMVCDemo/employee.html" commandName="employee">
+<form:form method="post" action="/SpringMVCDemo/employee.html" modelAttribute="employee">
     <div class="table-responsive">
         <table class="table table-bordered" style="width: 300px">
             <tr>
