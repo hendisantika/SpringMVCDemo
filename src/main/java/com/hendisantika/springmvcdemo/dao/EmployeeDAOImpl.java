@@ -37,7 +37,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     // Saving a new Employee
     public void saveEmployee(Employee employee) {
         String sql = "insert into Employee values(?,?,?,?)";
-        LOGGER.info("DAO Called {}", sql);
+        LOGGER.info("DAO Called {} Save Employee", sql);
         jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getDept(), employee.getAge());
     }
 
@@ -56,6 +56,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 return employee;
             }
         });
+        LOGGER.info("DAO Called {} getEmployeeById", sql);
         return employee;
     }
 
@@ -79,18 +80,21 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             }
 
         });
+        LOGGER.info("DAO Called {} getAllEmployees", sql);
         return employeeList;
     }
 
     // Updating a particular Employee
     public void updateEmployee(Employee employee) {
         String sql = "update Employee set age =?, dept=?,name=? where id=?";
+        LOGGER.info("DAO Called {} updateEmployee", sql);
         jdbcTemplate.update(sql, employee.getAge(), employee.getDept(), employee.getName(), employee.getId());
     }
 
     // Deletion of a particular Employee
     public void deleteEmployee(int id) {
-        String sql = "delete employee where id=?";
+        String sql = "delete FROM employee where id=?";
+        LOGGER.info("DAO Called {} deleteEmployee", sql);
         jdbcTemplate.update(sql, id);
     }
 }

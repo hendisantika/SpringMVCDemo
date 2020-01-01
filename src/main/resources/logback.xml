@@ -8,13 +8,20 @@
             </Pattern>
         </layout>
     </appender>
+    <appender name="File-Appender" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_PATH}/logfile-${timestamp-by-second}.log</file>
+        <encoder>
+            <pattern>%msg%n</pattern>
+            <outputPatternAsHeader>true</outputPatternAsHeader>
+        </encoder>
+    </appender>
 
     <logger name="org.springframework" level="debug" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
     <logger name="com.hendisantika.springmvcdemo" level="debug" additivity="false">
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="File-Appender"/>
     </logger>
 
     <root level="error">
