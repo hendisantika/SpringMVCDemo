@@ -60,7 +60,7 @@ public class EmployeeController {
         return new ModelAndView("redirect:/employees");
     }
 
-    @RequestMapping(value = "/employees")
+    @RequestMapping(value = {"/", "/employees"})
     public ModelAndView listEmployees(@ModelAttribute("employee") Employee employee) {
         ModelAndView model = new ModelAndView("employees");
 
