@@ -16,7 +16,7 @@
         <hibernate.version>4.3.11.Final</hibernate.version>
         <mysql.version>8.0.30</mysql.version>
         <jstl.version>1.2</jstl.version>
-        <logback.version>1.5.24</logback.version>
+        <logback.version>1.5.25</logback.version>
         <jcl.slf4j.version>2.0.17</jcl.slf4j.version>
     </properties>
 
