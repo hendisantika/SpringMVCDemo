@@ -68,7 +68,7 @@
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-jasper</artifactId>
-            <version>11.0.15</version>
+            <version>11.0.18</version>
         </dependency>
 
         <dependency>
